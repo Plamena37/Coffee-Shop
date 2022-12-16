@@ -1,9 +1,9 @@
 import CoffeeItem from "./CoffeeItem";
-import classes from "./CoffeeList.module.css";
+import styles from "./CoffeeList.module.css";
 
 function CoffeeList(props) {
   return (
-    <ul className={classes.list}>
+    <ul className={styles.list}>
       {props.coffees.map((coffee) => (
         <CoffeeItem
           key={coffee.id}

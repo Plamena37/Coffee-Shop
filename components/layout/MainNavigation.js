@@ -1,16 +1,17 @@
-import classes from "./MainNavigation.module.css";
+import styles from "./MainNavigation.module.css";
+import Link from "next/link";
 
 function MainNavigation() {
   return (
-    <header className={classes.header}>
-      <div className={classes.logo}>Coffee Shop</div>
+    <header className={styles.header}>
+      <div className={styles.logo}>Coffee Shop</div>
       <nav>
         <ul>
           <li>
-            <Link to="/">All Coffee's</Link>
+            <Link href="/">All Coffee's</Link>
           </li>
           <li>
-            <Link to="/new-coffee">Add New Coffee Recipe</Link>
+            <Link href="/new-coffee">Add New Recipe</Link>
           </li>
         </ul>
       </nav>

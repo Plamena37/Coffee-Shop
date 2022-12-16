@@ -1,19 +1,27 @@
+import { useRouter } from "next/router";
 import Card from "../ui/Card";
-import classes from "./CoffeeItem.module.css";
+import styles from "./CoffeeItem.module.css";
 
 function CoffeeItem(props) {
+  const router = useRouter();
+
+  function showDetailsHandler() {
+    // same as Link component
+    router.push("/" + props.id);
+  }
+
   return (
-    <li className={classes.item}>
+    <li className={styles.item}>
       <Card>
-        <div className={classes.image}>
+        <div className={styles.image}>
           <img src={props.image} alt={props.title} />
         </div>
-        <div className={classes.content}>
+        <div className={styles.content}>
           <h3>{props.title}</h3>
           <p>{props.ingredient}</p>
         </div>
-        <div className={classes.actions}>
-          <button>Show Details</button>
+        <div className={styles.actions}>
+          <button onClick={showDetailsHandler}>Show Details</button>
         </div>
       </Card>
     </li>

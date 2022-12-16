@@ -6,6 +6,7 @@
 
 body {
   font-family: "Open Sans", "Lato", sans-serif;
+  margin: 0;
 }
 
 h1,
@@ -16,3 +17,18 @@ h5,
 h6 {
   font-family: "Lato", sans-serif;
 }
+
+/* COLORS 
+#e98233
+#eee
+#fdf2e9
+#ed9b5c
+#d2752e
+#45260a
+#aaa
+#888
+#767676 (lightest grey allowed on #fff)
+#6f6f6f (lightest grey allowed on #fdf2e9)
+#555
+#333
+*/

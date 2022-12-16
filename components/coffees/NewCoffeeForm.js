@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
 import Card from "../ui/Card";
-import classes from "./NewCoffeeForm.module.css";
+import styles from "./NewCoffeeForm.module.css";
 
 function NewCoffeeForm(props) {
   const titleInputRef = useRef();
@@ -29,16 +29,16 @@ function NewCoffeeForm(props) {
 
   return (
     <Card>
-      <form className={classes.form} onSubmit={submitHandler}>
-        <div className={classes.control}>
+      <form className={styles.form} onSubmit={submitHandler}>
+        <div className={styles.control}>
           <label htmlFor="title">Coffee Title</label>
           <input type="text" required id="title" ref={titleInputRef} />
         </div>
-        <div className={classes.control}>
+        <div className={styles.control}>
           <label htmlFor="image">Coffee Image</label>
           <input type="url" required id="image" ref={imageInputRef} />
         </div>
-        <div className={classes.control}>
+        <div className={styles.control}>
           <label htmlFor="ingredients">Ingredients</label>
           <input
             type="text"
@@ -47,7 +47,7 @@ function NewCoffeeForm(props) {
             ref={ingredientsInputRef}
           />
         </div>
-        <div className={classes.control}>
+        <div className={styles.control}>
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
@@ -56,7 +56,7 @@ function NewCoffeeForm(props) {
             ref={descriptionInputRef}
           ></textarea>
         </div>
-        <div className={classes.actions}>
+        <div className={styles.actions}>
           <button>Add Coffee</button>
         </div>
       </form>
