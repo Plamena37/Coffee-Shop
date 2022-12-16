@@ -1,3 +1,4 @@
+// import { useEffect, useState } from "react";
 import CoffeeList from "../components/coffees/CoffeeList";
 
 const DUMMY_COFFEES = [
@@ -18,7 +19,38 @@ const DUMMY_COFFEES = [
   },
 ];
 
-function HomePage() {
-  return <CoffeeList coffees={DUMMY_COFFEES} />;
+function HomePage(props) {
+  // const [loadedCoffees, setLoadedCoffees] = useState([]);
+
+  // useEffect(() => {
+  //   // send http request and fetch data
+  //   setLoadedCoffees(DUMMY_COFFEES);
+  // }, []);
+
+  return <CoffeeList coffees={props.coffees} />;
 }
+
+export async function getStaticProps() {
+  // fetch data from API
+  return {
+    props: {
+      coffees: DUMMY_COFFEES,
+    },
+    // the page will be regenerated every 10s
+    revalidate: 10,
+  };
+}
+
+/*
+export async function getServerSideProps(context) {
+  const req = context.req;
+  const res = context.res;
+
+  //will not run during the build process but always on the server after deployment
+  return {
+    props: { coffees: DUMMY_COFFEES },
+  };
+}
+*/
+
 export default HomePage;
