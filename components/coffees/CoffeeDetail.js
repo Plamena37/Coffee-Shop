@@ -5,7 +5,7 @@ function CoffeeDetail(props) {
     <section className={styles.detail}>
       <img src={props.image} alt={props.title} />
       <h1>{props.title}</h1>
-      <p>{props.ingredient}</p>
+      <p>{props.ingredients}</p>
       <p>{props.description}</p>
     </section>
   );

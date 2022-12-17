@@ -1,31 +1,34 @@
 import CoffeeDetail from "../../components/coffees/CoffeeDetail";
+import { MongoClient, ObjectId } from "mongodb";
 
-function CoffeeDetails() {
+function CoffeeDetails(props) {
   return (
     <CoffeeDetail
-      image="https://www.worldatlas.com/r/w1200/upload/12/f8/83/coffee-cup.jpg"
-      title="Cappuccino"
-      ingredient="1/3 espresso, 1/3 steamed milk, and 1/3 foam"
-      description="Mix it up by using 2 or 3 tablespoons of flavored syrups"
+      image={props.coffeeData.image}
+      title={props.coffeeData.title}
+      ingredients={props.coffeeData.ingredients}
+      description={props.coffeeData.description}
     />
   );
 }
 
 export async function getStaticPaths() {
+  const client = await MongoClient.connect(
+    "mongodb+srv://plamena:99100316Pi@cluster0.xwlwv4y.mongodb.net/coffees?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+
+  const coffeesCollection = db.collection("coffees");
+
+  const coffees = await coffeesCollection.find({}, { _id: 1 }).toArray();
+
+  client.close();
+
   return {
     fallback: false,
-    paths: [
-      {
-        params: {
-          coffeeId: "c1",
-        },
-      },
-      {
-        params: {
-          coffeeId: "c2",
-        },
-      },
-    ],
+    paths: coffees.map((coffee) => ({
+      params: { coffeeId: coffee._id.toString() },
+    })),
   };
 }
 
@@ -34,15 +37,27 @@ export async function getStaticProps(context) {
 
   const coffeeId = context.params.coffeeId;
 
+  const client = await MongoClient.connect(
+    "mongodb+srv://plamena:99100316Pi@cluster0.xwlwv4y.mongodb.net/coffees?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+
+  const coffeesCollection = db.collection("coffees");
+
+  const selectedCoffee = await coffeesCollection.findOne({
+    _id: ObjectId(coffeeId),
+  });
+
+  client.close();
+
   return {
     props: {
       coffeeData: {
-        image:
-          "https://www.worldatlas.com/r/w1200/upload/12/f8/83/coffee-cup.jpg",
-        id: coffeeId,
-        title: "Cappuccino",
-        ingredient: "1/3 espresso, 1/3 steamed milk, and 1/3 foam",
-        description: "Mix it up by using 2 or 3 tablespoons of flavored syrups",
+        id: selectedCoffee._id.toString(),
+        image: selectedCoffee.image,
+        title: selectedCoffee.title,
+        ingredients: selectedCoffee.ingredients,
+        description: selectedCoffee.description,
       },
     },
   };

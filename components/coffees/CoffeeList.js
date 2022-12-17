@@ -10,7 +10,7 @@ function CoffeeList(props) {
           id={coffee.id}
           image={coffee.image}
           title={coffee.title}
-          ingredient={coffee.ingredient}
+          ingredients={coffee.ingredients}
         />
       ))}
     </ul>

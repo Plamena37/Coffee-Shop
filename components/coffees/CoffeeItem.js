@@ -18,7 +18,7 @@ function CoffeeItem(props) {
         </div>
         <div className={styles.content}>
           <h3>{props.title}</h3>
-          <p>{props.ingredient}</p>
+          <p>{props.ingredients}</p>
         </div>
         <div className={styles.actions}>
           <button onClick={showDetailsHandler}>Show Details</button>

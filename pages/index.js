@@ -1,23 +1,5 @@
-// import { useEffect, useState } from "react";
 import CoffeeList from "../components/coffees/CoffeeList";
-
-const DUMMY_COFFEES = [
-  {
-    id: "c1",
-    title: "Cappuccino",
-    image: "https://www.worldatlas.com/r/w1200/upload/12/f8/83/coffee-cup.jpg",
-    ingredient: "1/3 espresso, 1/3 steamed milk, and 1/3 foam",
-    description: "Mix it up by using 2 or 3 tablespoons of flavored syrups",
-  },
-  {
-    id: "c2",
-    title: "Latte",
-    image:
-      "https://bakingmischief.com/wp-content/uploads/2019/10/easy-caramel-latte-image-square.jpg",
-    ingredient: "2 cups milk,a single or double shot of espresso",
-    description: "Heat milk. Whisk briskly. Brew espresso and pour",
-  },
-];
+import { MongoClient } from "mongodb";
 
 function HomePage(props) {
   // const [loadedCoffees, setLoadedCoffees] = useState([]);
@@ -32,12 +14,28 @@ function HomePage(props) {
 
 export async function getStaticProps() {
   // fetch data from API
+  const client = await MongoClient.connect(
+    "mongodb+srv://plamena:99100316Pi@cluster0.xwlwv4y.mongodb.net/coffees?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+
+  const coffeesCollection = db.collection("coffees");
+
+  const coffees = await coffeesCollection.find().toArray();
+
+  client.close();
+
   return {
     props: {
-      coffees: DUMMY_COFFEES,
+      coffees: coffees.map((coffee) => ({
+        title: coffee.title,
+        image: coffee.image,
+        ingredients: coffee.ingredients,
+        id: coffee._id.toString(),
+      })),
     },
-    // the page will be regenerated every 10s
-    revalidate: 10,
+    // the page will be regenerated every 5s
+    revalidate: 5,
   };
 }
 
