@@ -1,5 +1,7 @@
 import CoffeeList from "../components/coffees/CoffeeList";
 import { MongoClient } from "mongodb";
+import Head from "next/document";
+import { Fragment } from "react";
 
 function HomePage(props) {
   // const [loadedCoffees, setLoadedCoffees] = useState([]);
@@ -9,7 +11,15 @@ function HomePage(props) {
   //   setLoadedCoffees(DUMMY_COFFEES);
   // }, []);
 
-  return <CoffeeList coffees={props.coffees} />;
+  return (
+    <Fragment>
+      {/* <Head>
+        <title>Coffe Shop</title>
+        <meta name="description" content="All kind of delicious coffees" />
+      </Head> */}
+      <CoffeeList coffees={props.coffees} />
+    </Fragment>
+  );
 }
 
 export async function getStaticProps() {

@@ -1,6 +1,8 @@
 // domain.com/new-coffee
 import { useRouter } from "next/router";
 import NewCoffeeForm from "../../components/coffees/NewCoffeeForm";
+import Head from "next/document";
+import { Fragment } from "react";
 
 function NewCoffeePage() {
   const router = useRouter();
@@ -20,7 +22,15 @@ function NewCoffeePage() {
     router.push("/");
   }
 
-  return <NewCoffeeForm onAddCoffee={addCoffeeHandler} />;
+  return (
+    <Fragment>
+      {/* <Head>
+        <title>Coffe Shop &mdash; add new coffee</title>
+        <meta name="description" content="Add new coffee" />
+      </Head> */}
+      <NewCoffeeForm onAddCoffee={addCoffeeHandler} />
+    </Fragment>
+  );
 }
 
 export default NewCoffeePage;

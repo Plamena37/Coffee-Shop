@@ -1,14 +1,22 @@
 import CoffeeDetail from "../../components/coffees/CoffeeDetail";
 import { MongoClient, ObjectId } from "mongodb";
+import Head from "next/head";
+import { Fragment } from "react";
 
 function CoffeeDetails(props) {
   return (
-    <CoffeeDetail
-      image={props.coffeeData.image}
-      title={props.coffeeData.title}
-      ingredients={props.coffeeData.ingredients}
-      description={props.coffeeData.description}
-    />
+    <Fragment>
+      {/* <Head>
+        <title>Coffe Shop &mdash; {props.coffeeData.title}</title>
+        <meta name="description" content={props.coffeeData.description} />
+      </Head> */}
+      <CoffeeDetail
+        image={props.coffeeData.image}
+        title={props.coffeeData.title}
+        ingredients={props.coffeeData.ingredients}
+        description={props.coffeeData.description}
+      />
+    </Fragment>
   );
 }
 
@@ -25,7 +33,7 @@ export async function getStaticPaths() {
   client.close();
 
   return {
-    fallback: false,
+    fallback: "blocking",
     paths: coffees.map((coffee) => ({
       params: { coffeeId: coffee._id.toString() },
     })),
