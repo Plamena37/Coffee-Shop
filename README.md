@@ -2,6 +2,13 @@
 ### ☕ Simple project with some coffee recipes. 
 
 
+### Functionalities:
+
+> - getting and rendering coffee recipes from a database
+> - having a detailed page for every coffee
+> - uploading a new recipe
+
+
 ### Used:
 
 > - NextJS with React
